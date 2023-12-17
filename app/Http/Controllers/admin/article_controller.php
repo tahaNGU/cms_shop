@@ -35,6 +35,7 @@ class article_controller extends Controller
         if (isset($request->popular_article)) {
             $popular_article = implode(',', $request->popular_article);
         }
+
         article::create([
             'canonical' => $request->canonical,
             'redirect' => $request->redirect,
