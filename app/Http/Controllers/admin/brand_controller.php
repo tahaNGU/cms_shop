@@ -29,6 +29,7 @@ class brand_controller extends Controller
             'meta_keywords' => $request->meta_keywords,
             'meta_description' => $request->meta_description,
             'title'=>$request->title,
+            'h1'=>$request->h1,
             'admin_id'=>auth()->user()->id,
         ]);
         return back()->with('success', __('alert_msg.success_submit'));
@@ -70,6 +71,7 @@ class brand_controller extends Controller
             'meta_keywords' => $request->meta_keywords,
             'meta_description' => $request->meta_description,
             'title' => $request->title,
+            'h1' => $request->h1,
 
         ]);
         return back()->with('success', __('alert_msg.success_submit'));
