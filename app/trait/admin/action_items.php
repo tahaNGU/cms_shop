@@ -20,6 +20,9 @@ trait action_items
             case 'change_state_main':
                 return self::change_state_main($model, $items);
                 break;
+            case 'change_state_sell':
+                return self::change_state_sell($model, $items);
+                break;
             case 'change_order':
                 return self::change_order($model, $items, $order);
                 break;
@@ -57,6 +60,18 @@ trait action_items
                 $model::find($item["id"])->update(["state_main" => "1"]);
             } elseif ($item["state_main"] === "1") {
                 $model::find($item["id"])->update(["state_main" => "0"]);
+            }
+        }
+        return __('alert_msg.success_change_state');
+    }
+    private function change_state_sell($model, $items)
+    {
+        $items = $model::whereIn('id', array_values($items))->get();
+        foreach ($items as $item) {
+            if ($item["state_sell"] === "0") {
+                $model::find($item["id"])->update(["state_sell" => "1"]);
+            } elseif ($item["state_sell"] === "1") {
+                $model::find($item["id"])->update(["state_sell" => "0"]);
             }
         }
         return __('alert_msg.success_change_state');

@@ -21,6 +21,7 @@
                                     <th>عنوان</th>
                                     <th>نام کارشناس</th>
                                     <th>وضعیت</th>
+                                    <th>وضعیت در پرفروش ترین ها</th>
                                     <th>نظرات</th>
                                     <th>دسته بندی</th>
                                     <th>تاریخ</th>
@@ -35,6 +36,7 @@
                                         <th>{{$product["title"]}}</th>
                                         <td style="width:150px">{{$product->admin->name . " ".$product->admin->lastname}}</td>
                                         <td style="width:150px">{{__('common.state')[$product['is_active']]}}</td>
+                                        <td style="width:150px">{{__('common.state')[$product['state_sell']]}}</td>
                                         <td style="width:150px">1</td>
                                         <td>{{$product->product_cat["title"]}}</td>
                                         <td style="width:150px">{{$product->convert_Verta()}}</td>
@@ -60,6 +62,9 @@
                         </button>
                         <button class="btn btn-danger btn-sm" value="delete_all" name="action_type">حذف کلی</button>
                         <button class="btn btn-primary btn-sm" value="change_order" name="action_type">تغییر ترتیب
+                        </button>
+                        <button class="btn btn-primary btn-sm" type="submit" value="change_state_sell"
+                                name="action_type">تغییر وضعیت در پرفروش ترین ها
                         </button>
                     </div>
                 </form>

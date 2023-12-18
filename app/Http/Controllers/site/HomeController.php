@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\banner;
 use App\Models\contact;
 use App\Models\page;
+use App\Models\product;
 use App\Models\product_cat;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class HomeController extends Controller
     public function main(){
         $banners=banner::where('state','1')->orderBy('order','desc')->get();
         $product_cat=product_cat::where('state','1')->where('state_main','1')->orderBy('order','desc')->get();
-        return view('site.main',compact('banners','product_cat'));
+        $product_sell=product::where('status','1')->where('state_sell','1')->get(['title','id','state_sell']);
+        return view('site.main',compact('banners','product_cat','product_sell'));
     }
 
     public function about(){
