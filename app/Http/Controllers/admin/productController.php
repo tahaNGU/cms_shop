@@ -61,8 +61,12 @@ class productController extends Controller
         return ['attributes' => $product->categories()->wherePivot('is_filter', '1')->get(), 'variation' => $product->categories()->wherePivot('is_variation', '1')->get()];
     }
 
-    public function list(){
+    public function list(Request $request){
         $products=product::all();
+        if($request->has('cat_id')){
+            $products=product::where('category_id',$request->get('cat_id'))->get();
+
+        }
         return view('admin.product.list',compact('products'));
     }
 

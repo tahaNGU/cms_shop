@@ -33,7 +33,7 @@
                                         <th scope="row"><input type="checkbox" class="check_item" name="check_item[]"
                                                                value="{{$product_cat["id"]}}"></th>
                                         <th style="width: 227px">{{$product_cat["title"]}}</th>
-                                        <th>0</th>
+                                        <th><a href="{{route('admin.product.list',['cat_id'=>$product_cat['id']])}}">{{$product_cat->product()->count()}}</a></th>
                                         <td style="width:150px" class="d-flex justify-content-center"><input type="text"
                                                                                                              style="width: 20%"
                                                                                                              name="order[{{$product_cat["id"]}}]"
