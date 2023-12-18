@@ -14,4 +14,12 @@ class productTagController extends Controller
             $product->product_tag()->attach($value);
         }
     }
+
+    public function change($tags,$product_id){
+        $product=product::find($product_id);
+        $product->product_tag()->detach();
+        foreach ($tags as $key => $value) {
+            $product->product_tag()->attach($value);
+        }
+    }
 }

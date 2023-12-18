@@ -123,6 +123,7 @@ Route::middleware('auth:admins')->group(function () {
         Route::get('attribute_category', [\App\Http\Controllers\admin\productController::class, 'attribute_category'])->name('attribute_category');
         Route::get('list', [\App\Http\Controllers\admin\productController::class, 'list'])->name('list');
         Route::get('edit/{id}', [\App\Http\Controllers\admin\productController::class, 'edit'])->name('edit');
+        Route::post('update/{id}', [\App\Http\Controllers\admin\productController::class, 'update'])->name('update');
         Route::post('action_all', [\App\Http\Controllers\admin\productController::class, 'action_items'])->name('action_items');
 
 

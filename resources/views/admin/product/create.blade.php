@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    @component('components.admin.form.form',['method'=>'post','action'=>route('admin.product.store')])
+    @component('components.admin.form.form',['method'=>'post','action'=>route('admin.product.store'),'pic_upload'=>true])
         @slot('content')
             @include('components.admin.form.module.seo')
             @component('components.admin.form.input',['title'=>'عنوان','name'=>'title','value'=>old('title')])@endcomponent
