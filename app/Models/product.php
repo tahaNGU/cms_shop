@@ -20,4 +20,8 @@ class product extends Model
         return $this->belongsToMany(tag::class,'product_tag');
     }
 
+    public function product_variation(){
+        return $this->hasMany(product_variation::class,'product_id');
+    }
+
 }

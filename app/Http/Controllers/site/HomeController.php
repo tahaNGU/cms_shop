@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function main(){
         $banners=banner::where('state','1')->orderBy('order','desc')->get();
         $product_cat=product_cat::where('state','1')->where('state_main','1')->orderBy('order','desc')->get();
-        $product_sell=product::where('status','1')->where('state_sell','1')->get(['title','id','state_sell']);
+        $product_sell=product::where('is_active','1')->where('state_sell','1')->get(['title','id','primary_image']);
         return view('site.main',compact('banners','product_cat','product_sell'));
     }
 
