@@ -21,6 +21,7 @@
                                     <th>دسته بندی</th>
                                     <th>ترتیب</th>
                                     <th>وضعیت</th>
+                                    <th>وضعیت در صفحه اصلی</th>
                                     <th>تاریخ</th>
                                     <th>#</th>
 
@@ -35,6 +36,7 @@
                                         <td>{{$article->article_cat_id['title'] ?? ''}}</td>
                                         <td class="d-flex justify-content-center"><input type="text" style="width: 20%" name="order[{{$article["id"]}}]" value="{{$article['order']}}"/></td>
                                         <td>{{__('common.state')[$article['state']]}}</td>
+                                        <td>{{__('common.state')[$article['state_main']]}}</td>
                                         <td >{{$article->convert_Verta($article->created_at)}}</td>
                                         <td style="width:150px" class="d-flex justify-content-center">
                                             <a href="{{route('admin.article.edit',['id'=>$article["id"]])}}"
@@ -51,6 +53,9 @@
                         <div class="card-footer">
                             <button class="btn btn-primary btn-sm" type="submit" value="change_state"
                                     name="action_type">تغییر وضعیت
+                            </button>
+                            <button class="btn btn-primary btn-sm" type="submit" value="change_state_main"
+                                    name="action_type">تغییر وضعیت در صفحه اصلی
                             </button>
                             <button class="btn btn-danger btn-sm" value="delete_all" name="action_type">حذف کلی</button>
                             <button class="btn btn-primary btn-sm" value="change_order" name="action_type">تغییر ترتیب

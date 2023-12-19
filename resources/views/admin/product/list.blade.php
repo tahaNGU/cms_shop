@@ -37,8 +37,14 @@
                                         <td style="width:150px">{{$product->admin->name . " ".$product->admin->lastname}}</td>
                                         <td style="width:150px">{{__('common.state')[$product['is_active']]}}</td>
                                         <td style="width:150px">
-                                            <div class="btn btn-primary btn-sm" style="width: 12rem">
+                                            <div class="btn btn-primary btn-sm" style="width: 14rem;margin: 3% 0">
                                                 نمایش در پرفروش ترین ها: {{__('common.state')[$product['state_sell']]}}
+                                            </div>
+                                            <div class="btn btn-primary btn-sm" style="width: 14rem;margin: 3% 0">
+                                                نمایش در جدید ترین ها: {{__('common.state')[$product['state_new']]}}
+                                            </div>
+                                            <div class="btn btn-primary btn-sm" style="width: 12rem;margin: 3% 0">
+                                                نمایش در پیشنهاد ها: {{__('common.state')[$product['state_suggest']]}}
                                             </div>
                                         </td>
                                         <td style="width:150px">1</td>
@@ -67,8 +73,20 @@
                         <button class="btn btn-danger btn-sm" value="delete_all" name="action_type">حذف کلی</button>
                         <button class="btn btn-primary btn-sm" value="change_order" name="action_type">تغییر ترتیب
                         </button>
+                        <br>
+                        <br>
                         <button class="btn btn-primary btn-sm" type="submit" value="change_state_sell"
                                 name="action_type">تغییر وضعیت در پرفروش ترین ها
+                        </button>
+                        <br>
+                        <br>
+                        <button class="btn btn-primary btn-sm" type="submit" value="change_state_new"
+                                name="action_type">تغییر وضعیت در جدید ترین ها
+                        </button>
+                        <br>
+                        <br>
+                        <button class="btn btn-primary btn-sm" type="submit" value="change_state_suggest"
+                                name="action_type">تغییر وضعیت در پیشنهاد ها
                         </button>
                     </div>
                 </form>

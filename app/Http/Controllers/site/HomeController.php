@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\site;
 
 use App\Http\Controllers\Controller;
+use App\Models\article;
 use App\Models\banner;
 use App\Models\contact;
 use App\Models\page;
@@ -13,10 +14,19 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function main(){
-        $banners=banner::where('state','1')->orderBy('order','desc')->get();
+        $banners=banner::where('state','1')->where('type_location','1')->orderBy('order','desc')->get();
+        $banners_under_sell_product=banner::where('state','1')->where('type_location','2')->orderBy('order','desc')->first();
+        $banners_under_new_product=banner::where('state','1')->where('type_location','3')->orderBy('order','desc')->get();
+
+
         $product_cat=product_cat::where('state','1')->where('state_main','1')->orderBy('order','desc')->get();
         $product_sell=product::where('is_active','1')->where('state_sell','1')->get(['title','id','primary_image']);
-        return view('site.main',compact('banners','product_cat','product_sell'));
+        $product_new=product::where('is_active','1')->where('state_new','1')->get(['title','id','primary_image']);
+
+        $product_suggest=product::where('is_active','1')->where('state_suggest','1')->get(['title','id','primary_image']);
+
+        $articles=article::where('state','1')->where('state_main','1')->orderBy('order','desc')->get();
+        return view('site.main',compact('banners','articles','product_suggest','product_cat','product_sell','banners_under_sell_product','product_new','banners_under_new_product'));
     }
 
     public function about(){
