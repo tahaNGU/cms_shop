@@ -36,7 +36,11 @@
                                         <th>{{$product["title"]}}</th>
                                         <td style="width:150px">{{$product->admin->name . " ".$product->admin->lastname}}</td>
                                         <td style="width:150px">{{__('common.state')[$product['is_active']]}}</td>
-                                        <td style="width:150px">{{__('common.state')[$product['state_sell']]}}</td>
+                                        <td style="width:150px">
+                                            <div class="btn btn-primary btn-sm" style="width: 12rem">
+                                                نمایش در پرفروش ترین ها: {{__('common.state')[$product['state_sell']]}}
+                                            </div>
+                                        </td>
                                         <td style="width:150px">1</td>
                                         <td>{{$product->product_cat["title"]}}</td>
                                         <td style="width:150px">{{$product->convert_Verta()}}</td>
