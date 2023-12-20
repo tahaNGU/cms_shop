@@ -34,6 +34,10 @@
                                 <input type="text" name="variation_values[price][]" class="form-control">
                             </div>
                             <div class="form-group col-md-3">
+                                <label for="">تخفیف</label>
+                                <input type="text" name="variation_values[discount][]" class="form-control">
+                            </div>
+                            <div class="form-group col-md-3">
                                 <label for="">تعداد</label>
                                 <input type="text" name="variation_values[quantity][]" class="form-control">
                             </div>

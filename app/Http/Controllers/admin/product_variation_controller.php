@@ -18,6 +18,7 @@ class product_variation_controller extends Controller
                 'product_id'=>$product_id,
                 'value'=>$variations['value'][$i],
                 'price'=>$variations['price'][$i],
+                'discount'=>$variations['discount'][$i],
                 'quantity'=>$variations['quantity'][$i],
                 'sku'=>$variations['sku'][$i],
             ]);

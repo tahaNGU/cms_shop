@@ -24,7 +24,7 @@ class product_request extends FormRequest
         return [
             'title'=>'required',
             'title_seo'=>'required',
-            'url_seo'=>'required|unique:products,url_seo',
+            'url_seo'=>'required',
             'brand_id'=>'required',
             'is_active'=>'required',
             'tag_ids'=>'required',
@@ -37,6 +37,7 @@ class product_request extends FormRequest
             'variation_values'=>'required',
             'variation_values.price.*' => 'integer',
             'variation_values.quantity.*' => 'integer',
+            'variation_values.discount.*' => 'integer',
         ];
     }
     public function prepareForValidation()

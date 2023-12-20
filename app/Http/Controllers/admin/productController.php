@@ -153,10 +153,11 @@ class productController extends Controller
             'variation_values.*.*'=>'required',
             'variation_values'=>'required',
             'variation_values.price.*' => 'integer',
+            'variation_values.discount.*' => 'integer',
             'variation_values.quantity.*' => 'integer',
         ]);
         $protrude_attribute_controller->change($request->attribute_ids,$product_id);
-        $protrude_variation_controller->change($request->attribute_ids,$product_id);
+        $protrude_variation_controller->change($request->variation_values,$product_id);
         return back()->with('success', __('alert_msg.success_submit'));
 
     }
