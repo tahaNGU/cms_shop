@@ -21,7 +21,7 @@ Route::get('/contact',[\App\Http\Controllers\site\HomeController::class,'contact
 Route::post('/contact/store',[\App\Http\Controllers\site\HomeController::class,'contact_store'])->name('contact_store');
 Route::get('/article',[\App\Http\Controllers\site\newsController::class,'index']);
 Route::get('/article/{article:url_seo}',[\App\Http\Controllers\site\newsController::class,'news_info'])->name('news_info');
-Route::get('/product',[\App\Http\Controllers\site\productController::class,'index']);
+Route::get('/product',[\App\Http\Controllers\site\productController::class,'index'])->name('product');
 
 Route::get('/faq',[\App\Http\Controllers\site\faqController::class,'index'])->name('faq');
 

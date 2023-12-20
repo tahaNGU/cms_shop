@@ -305,11 +305,10 @@
                                                     class="font-YekanBakh-ExtraBold text-base">{{$product["title"]}}</h3>
                                             </a>
                                             <div class="flex justify-center gap-4 text-base mt-4">
-                                                @if(isset($product_variation))
-                                                    {{--                                        <span class="line-through">45.000 تومان</span>--}}
-                                                    <span
-                                                        class="text-yellow-500">{{number_format($product_variation['price'])}}</span>
+                                                @if($product_variation['discount'] > 0)
+                                                    <span class="line-through">{{$product_variation['price']}} تومان</span>
                                                 @endif
+                                                <span class="text-yellow-500">{{number_format($product_variation['price_final'])}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -358,11 +357,10 @@
                                                 بزار</h3></a>
                                         <div class="flex justify-center gap-4 text-base mt-4">
                                             @php $product_variation=$product->product_variation()->first() @endphp
-                                            @if(isset($product_variation))
-                                                {{--                                        <span class="line-through">45.000 تومان</span>--}}
-                                                <span
-                                                    class="text-yellow-500">{{number_format($product_variation['price'])}}</span>
+                                            @if($product_variation['discount'] > 0)
+                                                <span class="line-through">{{$product_variation['price']}} تومان</span>
                                             @endif
+                                            <span class="text-yellow-500">{{number_format($product_variation['price_final'])}}</span>
                                         </div>
                                         <div class="flex justify-center gap-2 items-center mt-4">
                                             <a class="bg-yellow-500 p-2 text-white rounded-lg" href="cart.html">
@@ -426,9 +424,10 @@
                                         <div class="flex justify-center gap-4 text-base mt-4">
                                             @php $product_variation=$product->product_variation()->first() @endphp
                                             @if(isset($product_variation))
-                                                {{--                                        <span class="line-through">45.000 تومان</span>--}}
-                                                <span
-                                                    class="text-yellow-500">{{number_format($product_variation['price'])}}</span>
+                                                @if($product_variation['discount'] > 0)
+                                                                                        <span class="line-through">{{$product_variation['price']}} تومان</span>
+                                                @endif
+                                                <span class="text-yellow-500">{{number_format($product_variation['price_final'])}}</span>
                                             @endif
                                         </div>
                                         <div class="flex justify-center gap-2 items-center mt-4">

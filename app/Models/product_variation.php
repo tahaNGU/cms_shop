@@ -12,4 +12,13 @@ class product_variation extends Model
 
     protected $guarded=[];
     protected $table="product_variation";
+    protected $appends=['price_final'];
+
+    public function getPriceFinalAttribute(){
+        if($this->discount > 0){
+            return $this->price - ($this->price * ($this->discount / 100));
+        }
+        return $this->price;
+
+    }
 }

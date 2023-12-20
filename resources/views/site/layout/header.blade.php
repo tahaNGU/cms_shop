@@ -40,7 +40,7 @@
                             <li><a href="{{route('main')}}">صفحه اصلی</a></li>
                             @if(isset($menus))
                                 @foreach($menus as $menu)
-                                <li><a href="{{url($menu['address'])}}">{{$menu["title"]}}</a></li>
+                                    <li><a href="{{url($menu['address'])}}">{{$menu["title"]}}</a></li>
                                 @endforeach
                             @endif
 
@@ -51,10 +51,11 @@
             <div class="flex items-center lg:flex-1 gap-8">
                 <div><a href="{{route('main')}}"><img src="{{asset('site/assets/images/logo.png')}}" alt=""></a></div>
                 <div class="hidden lg:block form-control w-full">
-                    <div class="relative">
-                        <input type="text" placeholder="جستجو کنید در ترازو ..."
+                    <form action="{{route('product')}}" method="get">
+                        <div class="relative">
+                        <input type="text" name="keyowrd" @if(request()->has('keyword')) value="{{request()->get('keyword')}}" @endif placeholder="جستجو کنید در محصولات ..."
                                class="input input-bordered w-full placeholder:text-sm"/>
-                        <button class="btn absolute top-0 left-0 rounded-r-none">
+                        <button class="btn absolute top-0 left-0 rounded-r-none" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                  stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -63,6 +64,7 @@
 
                         </button>
                     </div>
+                    </form>
                 </div>
             </div>
             <div class="flex items-center gap-6">
@@ -76,26 +78,26 @@
                     </a>
                 </div>
                 @auth
-                <div class="hidden lg:block"><a href="javascript:void(0)">پنل کاربری</a></div>
+                    <div class="hidden lg:block"><a href="javascript:void(0)">پنل کاربری</a></div>
                 @elseauth
-                <div class="hidden lg:block"><a href="{{route('login')}}">ورود / ثبت نام</a></div>
+                    <div class="hidden lg:block"><a href="{{route('login')}}">ورود / ثبت نام</a></div>
                 @endauth
                 @auth
-                <a href="{{route('login')}}">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                         stroke="currentColor" class="w-6 h-6 lg:hidden">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
-                    </svg>
-                </a>
+                    <a href="{{route('login')}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="w-6 h-6 lg:hidden">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+                        </svg>
+                    </a>
                 @elseauth
-                <a href="javascript:void(0)">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                         stroke="currentColor" class="w-6 h-6 lg:hidden">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
-                    </svg>
-                </a>
+                    <a href="javascript:void(0)">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="w-6 h-6 lg:hidden">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+                        </svg>
+                    </a>
                 @endauth
                 <div class="indicator">
                     <span class="indicator-item badge bg-yellow-400">4+</span>
@@ -112,16 +114,17 @@
         <div class="flex justify-between items-center pb-4">
             <div class="block lg:hidden form-control w-full">
                 <div class="relative">
-                    <input type="text" placeholder="جستجو کنید در ترازو ..."
-                           class="input input-bordered w-full placeholder:text-sm"/>
-                    <button class="btn absolute top-0 left-0 rounded-r-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                             stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
-                        </svg>
-
-                    </button>
+                    <form action="{{route('product')}}" method="get">
+                        <input type="text" name="keyword" @if(request()->has('keyword')) value="{{request()->get('keyword')}}" @endif placeholder="جستجو کنید در محصولات ..."
+                               class="input input-bordered w-full placeholder:text-sm"/>
+                        <button class="btn absolute top-0 left-0 rounded-r-none" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                            </svg>
+                        </button>
+                    </form>
                 </div>
             </div>
             <div class="flex items-center gap-8">
