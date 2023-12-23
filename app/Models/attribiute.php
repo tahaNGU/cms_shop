@@ -17,4 +17,12 @@ class attribiute extends Model
     public function categories(){
         return $this->belongsToMany(product_cat::class,'attribute_category');
     }
+
+    public function value(){
+        return $this->hasMany(product_attribute::class,'attribute_id')->select('attribute_id','value')->distinct();
+    }
+
+    public function variationValue(){
+        return $this->hasMany(product_variation::class,'attribute_id')->select('attribute_id','value')->distinct('value');
+    }
 }

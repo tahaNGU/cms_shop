@@ -22,6 +22,9 @@
     @yield('content')
 
 <script src="{{asset('site/node_modules/swiper/swiper-bundle.min.js')}}"></script>
+<script src="{{asset('site/src/js/jquery.js')}}"></script>
 <script src="{{asset('site/src/js/main.js')}}"></script>
+@yield('scripts')
+
 </body>
 </html>

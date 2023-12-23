@@ -92,7 +92,7 @@ var swiper = new Swiper(".main-slider", {
         spaceBetween: 15,
       },
     },
-    
+
   });
 
   var swiper = new Swiper(".partners", {
@@ -112,7 +112,7 @@ var swiper = new Swiper(".main-slider", {
         spaceBetween: 50,
       },
     },
-    
+
   });
 
 
@@ -162,7 +162,7 @@ var swiper = new Swiper(".main-slider", {
         spaceBetween: 15,
       },
     },
-    
+
   });
 
   var swiper = new Swiper(".about-slider", {
@@ -226,11 +226,12 @@ var swiper = new Swiper(".main-slider", {
   // Initialize the first tab
   showTab('tab1');
 
+    //
+    //   let counter = 60
+    // setInterval(() => {
+    // 		if(counter>0){
+    // 			counter--
+    // 		}
+    //     document.getElementById('counterElement').style.setProperty('--value', counter)
+    // }, 1000)
 
-  let counter = 60
-setInterval(() => {
-		if(counter>0){
-			counter--
-		}
-    document.getElementById('counterElement').style.setProperty('--value', counter)
-}, 1000)
