@@ -24,13 +24,18 @@ class product_variation_controller extends Controller
             ]);
         }
     }
-    public function change($attributes, $product_id){
+    public function change($attributes, $product_id,$category_id){
         product_variation::where('product_id',$product_id)->delete();
-        foreach ($attributes as $key => $value) {
+        for ($i=0;$i<count($attributes['value']); $i++){
             product_variation::create([
-                'attribute_id'=>$key,
+                'attribute_id'=>product_cat::find($category_id)->categories()->wherePivot('is_variation','1')->first()->id,
+
                 'product_id'=>$product_id,
-                'value'=>$value
+                'value'=>$attributes['value'][$i],
+                'price'=>$attributes['price'][$i],
+                'discount'=>$attributes['discount'][$i],
+                'quantity'=>$attributes['quantity'][$i],
+                'sku'=>$attributes['sku'][$i],
             ]);
         }
     }

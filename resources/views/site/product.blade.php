@@ -153,7 +153,7 @@
                     </div>
                     <div class="flex justify-center mt-10">
                         <div class="join">
-                            {{$products->links()}}
+                            {{$products->withQueryString()->links()}}
                         </div>
                     </div>
                 </div>

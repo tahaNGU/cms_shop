@@ -146,6 +146,9 @@ class productController extends Controller
     public function product_cat_store(Request $request,$product_id){
         $protrude_attribute_controller=new product_attribute_controller();
         $protrude_variation_controller=new product_variation_controller();
+        product::find($product_id)->update([
+            'category_id' => $request->parent_id
+        ]);
         $request->validate([
             'parent_id'=>'required',
             'attribute_ids'=>'required',
@@ -157,7 +160,7 @@ class productController extends Controller
             'variation_values.quantity.*' => 'integer',
         ]);
         $protrude_attribute_controller->change($request->attribute_ids,$product_id);
-        $protrude_variation_controller->change($request->variation_values,$product_id);
+        $protrude_variation_controller->change($request->variation_values,$product_id,$request->parent_id);
         return back()->with('success', __('alert_msg.success_submit'));
 
     }
