@@ -9,13 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class page extends Model
 {
-    use HasFactory,convert_Verta,admin_convert;
+    use HasFactory,convert_Verta,admin_convert,\App\trait\admin\content;
     protected $guarded=[];
     public function admin(){
         return $this->belongsTo(admins::class,'admin_id');
     }
 
-    public function content(){
-        return $this->morphMany('App\\Models\\content','content');
-    }
+
 }

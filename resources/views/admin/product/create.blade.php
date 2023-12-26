@@ -12,6 +12,7 @@
             @component('components.admin.form.select2',['name'=>'brand_id','options'=>$brands,'label'=>'برند','choose'=>true,'value'=>old('brand_id')])@endcomponent
             @component('components.admin.form.select',['title'=>'وضعیت','id'=>'is_active','name'=>'is_active','array'=>__('common.state')])@endcomponent
             @component('components.admin.form.related_news',['title'=>'تگ ها','id'=>'tag_ids','name'=>'tag_ids','items'=>$tags])@endcomponent
+            @component('components.admin.form.related_news',['title'=>'محصولات مرتبط','id'=>'products_related','name'=>'products_related','items'=>$products_related])@endcomponent
             @component('components.admin.form.textarea',['title'=>'توضیحات','value'=>old('description'),'id'=>'description','name'=>'description'])@endcomponent
             @component('components.admin.form.upload_file',['title'=>'انتخاب تصویر اصلی','id'=>'pic','name'=>'pic'])@endcomponent
             @component('components.admin.form.select2',['name'=>'parent_id','options'=>$product_cats,'label'=>'دسته بندی','choose'=>true, 'sub_method'=>'sub_cats','value'=>old('parent_id')])@endcomponent
@@ -69,6 +70,7 @@
         $(document).ready(function () {
             $('#brand_id').select2();
             $('#tag_ids').select2();
+            $('#products_related').select2();
             $('.meta_keywords').tagsinput();
         })
         $("[name='parent_id']").change(function () {
@@ -81,18 +83,18 @@
                     $("#attributes").html('')
 
                     result.attributes.forEach(attribute => {
-                        let attributeGroup = $("<div/>",{
-                            class:"form-group col-md-3"
+                        let attributeGroup = $("<div/>", {
+                            class: "form-group col-md-3"
                         })
-                        attributeGroup.append($("<label/>",{
-                            for:attribute.title,
-                            text:attribute.title
+                        attributeGroup.append($("<label/>", {
+                            for: attribute.title,
+                            text: attribute.title
                         }))
-                        attributeGroup.append($("<input/>",{
-                            type:"text",
-                            class:"form-control",
-                            name:`attribute_ids[${attribute.id}]`,
-                            id:"name"
+                        attributeGroup.append($("<input/>", {
+                            type: "text",
+                            class: "form-control",
+                            name: `attribute_ids[${attribute.id}]`,
+                            id: "name"
                         }))
                         $("#attributes").append(attributeGroup)
                     })
@@ -102,7 +104,6 @@
                 }
             })
         })
-
 
 
     </script>

@@ -23,6 +23,7 @@ Route::get('/article',[\App\Http\Controllers\site\newsController::class,'index']
 Route::get('/article/{article:url_seo}',[\App\Http\Controllers\site\newsController::class,'news_info'])->name('news_info');
 Route::get('/product/{product_cat?}',[\App\Http\Controllers\site\productController::class,'index'])->name('product');
 Route::get('/compare/{product_cat_id}',[\App\Http\Controllers\site\compareController::class,'index'])->name('compare');
+Route::get('/product_page/{product:url_seo}',[\App\Http\Controllers\site\productController::class,'product'])->name('product_page');
 
 Route::get('/faq',[\App\Http\Controllers\site\faqController::class,'index'])->name('faq');
 

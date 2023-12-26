@@ -4,6 +4,7 @@ namespace App\Http\Controllers\site;
 
 use App\Http\Controllers\Controller;
 use App\Models\admin\brand;
+use App\Models\content;
 use App\Models\product;
 use App\Models\product_cat;
 use App\Models\product_variation;
@@ -24,6 +25,15 @@ class productController extends Controller
         }
         $brands=brand::where('state','1')->get();
         $product_cats=product_cat::where('state','1')->get();
-        return view('site.product',compact('products','brands','product_cats','product_attribute','product_variation'));
+        return view('site.products',compact('products','brands','product_cats','product_attribute','product_variation'));
+    }
+
+
+    public function product(product $product){
+        $related_product=[];
+        if(!empty($product['product_related'])){
+            $related_product=product::whereIn('id',explode(',',$product['product_related']))->where('is_active','1')->get();
+        }
+        return view('site.product',compact('product','related_product'));
     }
 }

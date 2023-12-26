@@ -15,7 +15,7 @@ class verify_content
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $valid_content = ['page'];
+        $valid_content = ['page','product'];
         if (!in_array($request->route()->parameter('module'),$valid_content)) {
             abort(404);
         }

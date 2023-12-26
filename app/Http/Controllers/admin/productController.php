@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 class productController extends Controller
 {
     use action_items;
+
     public function create()
     {
         $brands = brand::all();
@@ -22,20 +23,26 @@ class productController extends Controller
         $product_cats = product_cat::where('parent_id', '0')->get();
         $redirect_kinds = __('seo.redirect_kinds');
         $index_type = __('seo.index_type');
-        return view('admin.product.create', compact('brands', 'tags', 'product_cats', 'redirect_kinds', 'index_type'));
+        $products_related = product::all();
+        return view('admin.product.create', compact('brands', 'tags', 'product_cats', 'redirect_kinds', 'index_type', 'products_related'));
     }
 
     public function store(product_request $request)
     {
-        $protrude_attribute_controller=new product_attribute_controller();
-        $protrude_variation_controller=new product_variation_controller();
-        $product_tag_controller=new productTagController();
+        $protrude_attribute_controller = new product_attribute_controller();
+        $protrude_variation_controller = new product_variation_controller();
+        $product_tag_controller = new productTagController();
 
         $pic = 'product/' . time() . '.' . $request->pic->extension();
         $request->pic->move(public_path('images/product'), $pic);
 
 
-        $product=product::create([
+        $products_related='';
+        if(isset($request->products_related) && !empty($request->products_related)){
+            $products_related=implode(',',$request->products_related);
+        }
+
+        $product = product::create([
             'canonical' => $request->canonical,
             'redirect' => $request->redirect,
             'redirect_kind' => $request->redirect_kind,
@@ -51,12 +58,13 @@ class productController extends Controller
             'primary_image' => $pic,
             'description' => $request->description,
             'is_active' => $request->is_active,
+            'product_related' => $products_related,
             'admin_id' => auth()->user()->id,
         ]);
 
-        $protrude_attribute_controller->store($request->attribute_ids,$product->id);
-        $protrude_variation_controller->store($request->variation_values,$product->id,$request->parent_id);
-        $product_tag_controller->store($request->tag_ids,$product->id);
+        $protrude_attribute_controller->store($request->attribute_ids, $product->id);
+        $protrude_variation_controller->store($request->variation_values, $product->id, $request->parent_id);
+        $product_tag_controller->store($request->tag_ids, $product->id);
         return back()->with('success', __('alert_msg.success_submit'));
 
     }
@@ -67,33 +75,40 @@ class productController extends Controller
         return ['attributes' => $product->categories()->wherePivot('is_filter', '1')->get(), 'variation' => $product->categories()->wherePivot('is_variation', '1')->get()];
     }
 
-    public function list(Request $request){
-        $products=product::all();
-        if($request->has('cat_id')){
-            $products=product::where('category_id',$request->get('cat_id'))->get();
+    public function list(Request $request)
+    {
+        $products = product::all();
+        if ($request->has('cat_id')) {
+            $products = product::where('category_id', $request->get('cat_id'))->get();
 
         }
-        return view('admin.product.list',compact('products'));
+        return view('admin.product.list', compact('products'));
     }
 
-    public function edit($id){
-        $product=product::find($id);
+    public function edit($id)
+    {
+        $product = product::find($id);
         $brands = brand::all();
         $tags = tag::all();
         $product_cats = product_cat::where('parent_id', '0')->get();
         $redirect_kinds = __('seo.redirect_kinds');
         $index_type = __('seo.index_type');
+        $product_related_checked='';
+        $products_related = product::where('id','!=',$id)->get();
 
-        return view('admin.product.edit',compact('product','brands', 'tags', 'product_cats', 'redirect_kinds', 'index_type'));
+        if(!empty($product['product_related'])){
+            $product_related_checked=explode(',',$product['product_related']);
+        }
+        return view('admin.product.edit', compact('product','products_related','product_related_checked', 'brands', 'tags', 'product_cats', 'redirect_kinds', 'index_type'));
     }
 
-    public function update(product_request_edit $request,$id){
+    public function update(product_request_edit $request, $id)
+    {
 
 
-
-        $pic='';
+        $pic = '';
         if ($request->has('upload_value_pic')) {
-            $pic=$request->get('upload_value_pic');
+            $pic = $request->get('upload_value_pic');
 
             if ($request->has('pic')) {
                 if (is_object($request->pic)) {
@@ -101,8 +116,7 @@ class productController extends Controller
                     $request->pic->move(public_path('images/news'), $pic);
                 }
             }
-        }
-        else{
+        } else {
             if ($request->has('pic')) {
                 if (is_object($request->pic)) {
                     $pic = 'product/' . time() . '.' . $request->pic->extension();
@@ -110,8 +124,13 @@ class productController extends Controller
                 }
             }
         }
-        $product_tag_controller=new productTagController();
-        $product=product::find($id)->update([
+        $products_related='';
+        if(isset($request->products_related) && !empty($request->products_related)){
+            $products_related=implode(',',$request->products_related);
+        }
+
+        $product_tag_controller = new productTagController();
+        $product = product::find($id)->update([
             'canonical' => $request->canonical,
             'redirect' => $request->redirect,
             'redirect_kind' => $request->redirect_kind,
@@ -124,47 +143,49 @@ class productController extends Controller
             'title' => $request->title,
             'brand_id' => $request->brand_id,
             'primary_image' => $pic,
-                'description' => $request->description,
+            'description' => $request->description,
+            'product_related' => $products_related,
             'is_active' => $request->is_active,
         ]);
-        $product_tag_controller->change($request->tag_ids,$id);
+        $product_tag_controller->change($request->tag_ids, $id);
         return back()->with('success', __('alert_msg.success_change'));
 
     }
 
 
-    public function product_cat_update($id){
+    public function product_cat_update($id)
+    {
         $product_cats = product_cat::all();
         $product = product::find($id);
-        return view('admin.product.product_cat_update',compact('product_cats','product'));
+        return view('admin.product.product_cat_update', compact('product_cats', 'product'));
     }
 
 
-
-
-
-    public function product_cat_store(Request $request,$product_id){
-        $protrude_attribute_controller=new product_attribute_controller();
-        $protrude_variation_controller=new product_variation_controller();
+    public function product_cat_store(Request $request, $product_id)
+    {
+        $protrude_attribute_controller = new product_attribute_controller();
+        $protrude_variation_controller = new product_variation_controller();
         product::find($product_id)->update([
             'category_id' => $request->parent_id
         ]);
         $request->validate([
-            'parent_id'=>'required',
-            'attribute_ids'=>'required',
-            'attribute_ids.*'=>'required',
-            'variation_values.*.*'=>'required',
-            'variation_values'=>'required',
+            'parent_id' => 'required',
+            'attribute_ids' => 'required',
+            'attribute_ids.*' => 'required',
+            'variation_values.*.*' => 'required',
+            'variation_values' => 'required',
             'variation_values.price.*' => 'integer',
             'variation_values.discount.*' => 'integer',
             'variation_values.quantity.*' => 'integer',
         ]);
-        $protrude_attribute_controller->change($request->attribute_ids,$product_id);
-        $protrude_variation_controller->change($request->variation_values,$product_id,$request->parent_id);
+        $protrude_attribute_controller->change($request->attribute_ids, $product_id);
+        $protrude_variation_controller->change($request->variation_values, $product_id, $request->parent_id);
         return back()->with('success', __('alert_msg.success_submit'));
 
     }
-    public function action_items(Request $request){
+
+    public function action_items(Request $request)
+    {
         if (isset($request->check_item)) {
             return back()->with('error', $this->action_items_list($request->action_type, product::class, false, $request->check_item, $request->order));
 

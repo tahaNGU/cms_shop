@@ -21,6 +21,7 @@
                                     <th>عنوان</th>
                                     <th>نام کارشناس</th>
                                     <th>وضعیت</th>
+                                    <th>محتوی</th>
                                     <th>وضعیت در پرفروش ترین ها</th>
                                     <th>نظرات</th>
                                     <th>دسته بندی</th>
@@ -36,6 +37,9 @@
                                         <th>{{$product["title"]}}</th>
                                         <td style="width:150px">{{$product->admin->name . " ".$product->admin->lastname}}</td>
                                         <td style="width:150px">{{__('common.state')[$product['is_active']]}}</td>
+                                        <td style="width:150px"><a
+                                                href="{{route('admin.content.list',['item_id'=>$product["id"],'module'=>'product'])}}">{{$product->content()->count()}}</a>
+                                        </td>
                                         <td style="width:150px">
                                             <div class="btn btn-primary btn-sm" style="width: 14rem;margin: 3% 0">
                                                 نمایش در پرفروش ترین ها: {{__('common.state')[$product['state_sell']]}}
@@ -54,8 +58,9 @@
                                             <a href="{{route('admin.product.edit',['id'=>$product["id"]])}}"
                                                class="btn btn-sm btn-primary mx-1"><i class="fas fa-edit"></i></a>
                                             <a href="{{route('admin.product.product_cat_update',['id'=>$product["id"]])}}"
-                                               class="btn btn-sm btn-secondary">تغییر دسته بندی</a>
-
+                                               class="btn btn-sm btn-secondary">تغییر</a>
+                                            <a href="{{route('admin.content.create',['item_id'=>$product["id"],'module'=>'product'])}}"
+                                               class="btn btn-sm btn-secondary"><i class="fas fa-file-image"></i></a>
                                             <a class="btn btn-sm btn-danger"
                                                href=""><i
                                                     class="fas fa-trash"></i></a>

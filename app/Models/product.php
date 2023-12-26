@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class product extends Model
 {
-    use HasFactory,convert_Verta,admin_convert;
+    use HasFactory,convert_Verta,admin_convert,\App\trait\admin\content;
     protected $guarded=[];
 
     public function product_cat(){
@@ -72,6 +72,10 @@ class product extends Model
             }
         }
         return $query;
+    }
+
+    public function content_site(){
+        return $this->content()->where('state','1')->orderBy('order','desc')->limit(4)->get();
     }
 
 }

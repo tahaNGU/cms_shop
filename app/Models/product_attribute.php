@@ -14,7 +14,10 @@ class product_attribute extends Model
     protected $guarded=[];
 
 
-
+    public function attribute()
+    {
+        return $this->belongsTo(attribiute::class);
+    }
 
 
 }
