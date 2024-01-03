@@ -22,11 +22,15 @@ class article extends Model
 
 
     public function article_month(){
-        return Jalalian::forge($this->created_at)->format('%B');;
+        return Jalalian::forge($this->created_at)->format('%B');
     }
 
     public function article_day(){
         return Jalalian::forge($this->created_at)->format('%d');
+    }
+
+    public function article_date(){
+        return Jalalian::forge($this->created_at)->format('%d %B %Y');
     }
     public function convert_show_time_date(){
         return verta($this->show_time_date)->format('d/m/Y');

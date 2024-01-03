@@ -221,6 +221,13 @@ return [
         'user_name'=>'نام کاربری',
         'otpcode'=>'کد تایید',
         'parent_id'=>'دسته بندی',
+        'address_site'=>'آدرس سایت',
+        'company_name'=>'نام شرکت',
+        'province'=>'استان',
+        'city'=>'شهر',
+        'tell'=>'تلفن',
+        'tell_emergency'=>'تلفن اضطراری',
+        'post_code'=>'کدپستی',
     ],
 
 ];

@@ -53,17 +53,17 @@
                 <div class="hidden lg:block form-control w-full">
                     <form action="{{route('product')}}" method="get">
                         <div class="relative">
-                        <input type="text" name="keyowrd" @if(request()->has('keyword')) value="{{request()->get('keyword')}}" @endif placeholder="جستجو کنید در محصولات ..."
-                               class="input input-bordered w-full placeholder:text-sm"/>
-                        <button class="btn absolute top-0 left-0 rounded-r-none" type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
-                            </svg>
+                            <input type="text" name="keyowrd" @if(request()->has('keyword')) value="{{request()->get('keyword')}}" @endif placeholder="جستجو کنید در محصولات ..."
+                                   class="input input-bordered w-full placeholder:text-sm"/>
+                            <button class="btn absolute top-0 left-0 rounded-r-none" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                                </svg>
 
-                        </button>
-                    </div>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -78,8 +78,8 @@
                     </a>
                 </div>
                 @auth
-                    <div class="hidden lg:block"><a href="javascript:void(0)">پنل کاربری</a></div>
-                @elseauth
+                    <div class="hidden lg:block"><a href="{{route('panel')}}">پنل کاربری</a></div>
+                @else
                     <div class="hidden lg:block"><a href="{{route('login')}}">ورود / ثبت نام</a></div>
                 @endauth
                 @auth
@@ -90,7 +90,7 @@
                                   d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
                         </svg>
                     </a>
-                @elseauth
+                @else
                     <a href="javascript:void(0)">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor" class="w-6 h-6 lg:hidden">
@@ -100,8 +100,8 @@
                     </a>
                 @endauth
                 <div class="indicator">
-                    <span class="indicator-item badge bg-yellow-400">4+</span>
-                    <a href="cart.html" class="p-1">
+                    <span class="indicator-item badge bg-yellow-400">{{count(\Cart::getContent())}}+</span>
+                    <a href="{{route('order')}}" class="p-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"

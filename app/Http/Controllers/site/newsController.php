@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class newsController extends Controller
 {
     public function index(){
-        $article=article::where('state','1')->where('show_time_date','<=',time())->orderBy('order','desc')->get();
+        $article=article::where('state','1')->where('show_time_date','<=',time())->orderBy('order','desc')->paginate(10);
         return view('site.news',compact('article'));
     }
     public function news_info(article $article){

@@ -4,7 +4,7 @@
     <label class="control-label">{{$title}}</label>
     <select class="select2 form-control select2-multiple" id="{{$id}}" name="{{$name}}[]" multiple
             data-placeholder="انتخاب کنید ...">
-        @if(isset($items[0]))
+        @if(isset($items)  )
             @foreach($items as $item)
 
                 <option {{ (in_array($item->id,$related_arr)) ? 'selected' : '' }} value="{{$item[$key]}}">{{$item[$value]}}</option>

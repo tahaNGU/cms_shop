@@ -20,10 +20,10 @@ class HomeController extends Controller
 
 
         $product_cat=product_cat::where('state','1')->where('state_main','1')->orderBy('order','desc')->get();
-        $product_sell=product::where('is_active','1')->where('state_sell','1')->get(['title','id','primary_image']);
-        $product_new=product::where('is_active','1')->where('state_new','1')->get(['title','id','primary_image']);
+        $product_sell=product::where('is_active','1')->where('state_sell','1')->get(['title','id','primary_image','url_seo']);
+        $product_new=product::where('is_active','1')->where('state_new','1')->get(['title','id','primary_image','url_seo']);
 
-        $product_suggest=product::where('is_active','1')->where('state_suggest','1')->get(['title','id','primary_image']);
+        $product_suggest=product::where('is_active','1')->where('state_suggest','1')->get(['title','id','primary_image','url_seo']);
 
         $articles=article::where('state','1')->where('state_main','1')->orderBy('order','desc')->get();
         return view('site.main',compact('banners','articles','product_suggest','product_cat','product_sell','banners_under_sell_product','product_new','banners_under_new_product'));

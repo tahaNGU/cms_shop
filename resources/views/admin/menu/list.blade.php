@@ -22,6 +22,7 @@
                                     <th style="width: 12rem">نوع باز شدن</th>
                                     <th>وضعیت</th>
                                     <th>زیر بخش</th>
+                                    <th>بخش</th>
                                     <th>ترتیب</th>
                                     <th>تاریخ</th>
                                     <th>#</th>
@@ -39,6 +40,7 @@
                                         <td style="width:150px"><a href="{{route('admin.menu.list',['parent_id'=>$item["id"]])}}">{{count($item->sub_cats)}}</a></td>
                                         <td style="width:150px" class="d-flex justify-content-center"><input type="text" style="width: 20%" name="order[{{$item["id"]}}]"
                                                                                                              value="{{$item['order']}}"/></td>
+                                        <td style="width:150px">{{__('common.menu_type')[$item['menu_type']]}}</td>
                                         <td style="width:150px">{{$item->convert_Verta()}}</td>
                                         <td style="width:150px" style="width:150px" class="d-flex justify-content-center">
                                             <a href="{{route('admin.menu.edit',['id'=>$item['id']])}}" class="btn btn-sm btn-primary mx-1"><i class="fas fa-edit"></i></a>

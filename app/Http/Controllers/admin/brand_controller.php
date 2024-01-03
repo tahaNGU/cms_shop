@@ -19,6 +19,8 @@ class brand_controller extends Controller
     }
 
     public function store(brand_request $request){
+        $pic = 'brand/' . time() . '.' . $request->pic->extension();
+        $request->pic->move(public_path('images/brand'), $pic);
         brand::create([
             'canonical' => $request->canonical,
             'redirect' => $request->redirect,
@@ -29,6 +31,7 @@ class brand_controller extends Controller
             'meta_keywords' => $request->meta_keywords,
             'meta_description' => $request->meta_description,
             'title'=>$request->title,
+            'pic'=>$pic,
             'h1'=>$request->h1,
             'admin_id'=>auth()->user()->id,
         ]);
@@ -61,6 +64,24 @@ class brand_controller extends Controller
     }
 
     public function update(brand_edit_request $request,$id){
+        if ($request->has('upload_value_pic')) {
+            $pic=$request->get('upload_value_pic');
+
+            if ($request->has('pic')) {
+                if (is_object($request->pic)) {
+                    $pic = 'brand/' . time() . '.' . $request->pic->extension();
+                    $request->pic->move(public_path('images/brand'), $pic);
+                }
+            }
+        }
+        else{
+            if ($request->has('pic')) {
+                if (is_object($request->pic)) {
+                    $pic = 'brand/' . time() . '.' . $request->pic->extension();
+                    $request->pic->move(public_path('images/brand'), $pic);
+                }
+            }
+        }
         brand::find($id)->update([
             'canonical' => $request->canonical,
             'redirect' => $request->redirect,
@@ -72,6 +93,7 @@ class brand_controller extends Controller
             'meta_description' => $request->meta_description,
             'title' => $request->title,
             'h1' => $request->h1,
+            'pic' => $pic,
 
         ]);
         return back()->with('success', __('alert_msg.success_submit'));

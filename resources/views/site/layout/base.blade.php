@@ -20,6 +20,7 @@
 <body class="bg-slate-50 font-YekanBakh-Regular text-sm">
     @include('site.layout.header')
     @yield('content')
+    @include('site.layout.footer')
 
 <script src="{{asset('site/node_modules/swiper/swiper-bundle.min.js')}}"></script>
 <script src="{{asset('site/src/js/jquery.js')}}"></script>

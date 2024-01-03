@@ -19,8 +19,8 @@
                                     <th><input type="checkbox" class="check_all"></th>
                                     <th>عنوان</th>
                                     <th>ترتیب</th>
-
                                     <th>وضعیت</th>
+                                    <th>وضعیت در فوتر</th>
                                     <th>تاریخ</th>
                                     <th>#</th>
                                 </tr>
@@ -34,6 +34,7 @@
                                         <td style="width:150px" class="d-flex justify-content-center"><input type="text" style="width: 20%" name="order[{{$brand["id"]}}]"
                                                                                                              value="{{$brand['order']}}"/></td>
                                         <td style="width:230px">{{__('common.state')[$brand['state']]}}</td>
+                                        <td style="width:230px">{{__('common.state')[$brand['state_footer']]}}</td>
                                         <td style="width:150px">{{$brand->convert_Verta()}}</td>
                                         <td style="width:150px" style="width:150px" class="d-flex">
                                             <a href="{{route('admin.brand.edit',['id'=>$brand["id"]])}}"
@@ -50,6 +51,9 @@
                         <div class="card-footer">
                             <button class="btn btn-primary btn-sm" type="submit" value="change_state"
                                     name="action_type">تغییر وضعیت
+                            </button>
+                            <button class="btn btn-primary btn-sm" type="submit" value="change_state_footer"
+                                    name="action_type">تغییر وضعیت در فوتر
                             </button>
                             <button class="btn btn-danger btn-sm" value="delete_all" name="action_type">حذف کلی</button>
                             <button class="btn btn-primary btn-sm" value="change_order" name="action_type">تغییر ترتیب

@@ -25,6 +25,8 @@ class brand_request extends FormRequest
             'title_seo'=>'required',
             'url_seo'=>'required|unique:brands,url_seo',
             'title'=>'required',
+            'pic'=>'required|mimes:jpg,jpeg,png,bmp,tiff|max:2048',
+
         ];
     }
 

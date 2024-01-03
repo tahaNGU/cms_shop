@@ -18,6 +18,7 @@ class attributeController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate(['title' => 'required']);
         attribiute::create([
             'title' => $request->title,

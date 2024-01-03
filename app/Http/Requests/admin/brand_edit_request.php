@@ -21,11 +21,17 @@ class brand_edit_request extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules= [
             'title_seo'=>'required',
             'url_seo'=>'required|unique:brands,url_seo,'.$this->id,
             'title'=>'required',
+            'pic'=>'required|image|max:2048',
+
         ];
+        if(!empty($this->upload_value_pic)){
+            unset($rules["pic"]);
+        }
+        return $rules;
     }
 
     protected function prepareForValidation(): void

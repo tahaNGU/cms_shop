@@ -24,7 +24,7 @@
                             <div class="bg-white p-4 rounded-3xl">
                                 <div class="relative">
                                     <a href="{{route('news_info',['article'=>$item['url_seo']])}}"><img class="rounded-2xl"
-                                                                    src="{{asset('images/'.$item["pic"])}}" alt=""></a>
+                                                                                                        src="{{asset('images/'.$item["pic"])}}" alt=""></a>
                                     <div
                                         class="absolute top-4 left-4 bg-white border-t-4 border-yellow-400 p-2 px-3 rounded-xl">
                                         <div class="flex flex-col">
@@ -59,11 +59,10 @@
 
             <div class="flex justify-center mt-10">
                 <div class="join">
-                    <button class="join-item btn">«</button>
-                    <button class="join-item btn">صفحه 22</button>
-                    <button class="join-item btn">»</button>
+                    {{$article->withQueryString()->links()}}
                 </div>
             </div>
+
         </div>
     </section>
 

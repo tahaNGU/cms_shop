@@ -26,11 +26,14 @@ trait action_items
             case 'change_state_suggest':
                 return self::change_state_suggest($model, $items);
                 break;
-                case 'change_state_new':
+            case 'change_state_new':
                 return self::change_state_new($model, $items);
                 break;
             case 'change_order':
                 return self::change_order($model, $items, $order);
+                break;
+            case 'change_state_footer':
+                return self::change_state_footer($model, $items);
                 break;
         }
 
@@ -103,6 +106,18 @@ trait action_items
                 $model::find($item["id"])->update(["state_new" => "1"]);
             } elseif ($item["state_new"] === "1") {
                 $model::find($item["id"])->update(["state_new" => "0"]);
+            }
+        }
+        return __('alert_msg.success_change_state');
+    }
+    private function change_state_footer($model, $items)
+    {
+        $items = $model::whereIn('id', array_values($items))->get();
+        foreach ($items as $item) {
+            if ($item["state_footer"] === "0") {
+                $model::find($item["id"])->update(["state_footer" => "1"]);
+            } elseif ($item["state_footer"] === "1") {
+                $model::find($item["id"])->update(["state_footer" => "0"]);
             }
         }
         return __('alert_msg.success_change_state');

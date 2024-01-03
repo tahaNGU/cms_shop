@@ -5,10 +5,12 @@
 @endsection
 
 @section('content')
-    @component('components.admin.form.form',['method'=>'post','action'=>route('admin.brand.store')])
+    @component('components.admin.form.form',['method'=>'post','action'=>route('admin.brand.store'),'pic_upload'=>true])
         @slot('content')
             @include('components.admin.form.module.seo')
             @component('components.admin.form.input',['title'=>'عنوان','name'=>'title','value'=>old('title')])@endcomponent
+            @component('components.admin.form.upload_file',['title'=>'تصویر (142x41)','id'=>'pic','name'=>'pic'])@endcomponent
+
             @component('components.admin.form.button')@endcomponent
 
         @endslot

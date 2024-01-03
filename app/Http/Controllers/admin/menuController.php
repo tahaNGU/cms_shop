@@ -23,6 +23,7 @@ class menuController extends Controller
     public function store(menu_request $request){
         menu::create([
             'title'=>$request->title,
+            'state'=>$request->state,
             'address'=>$request->address,
             'menu_type'=>$request->menu_type,
             'kind_open'=>$request->kind_open,
@@ -74,6 +75,8 @@ class menuController extends Controller
             'kind_open'=>$request->kind_open,
             'admin_id'=>auth()->user()->id,
             'parent_id'=>$request->parent_id,
+            'state'=>$request->state,
+
         ]);
         return back()->with('success', __('alert_msg.success_submit'));
     }

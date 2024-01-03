@@ -14,12 +14,16 @@ class product_cat extends Model
 
     public function sub_cats()
     {
-        return $this->hasMany(product_cat::class, 'parent_id');
+        return $this->hasMany(product_cat::class, 'parent_id')->where('state','1');
     }
 
     public function product()
     {
         return $this->hasMany(product::class, 'category_id');
+    }
+
+    public function parent_product_cat(){
+        return $this->belongsTo(product_cat::class,'parent_id');
     }
 
     public function categories()
