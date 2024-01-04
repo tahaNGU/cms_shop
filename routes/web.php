@@ -42,8 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::get('order2',[\App\Http\Controllers\site\cartController::class,'order2'])->name('order2');
     Route::post('user_info_update',[\App\Http\Controllers\site\cartController::class,'user_info_update'])->name('user_info_update');
     Route::get('/panel',[\App\Http\Controllers\panelController::class,'index'])->name('panel');
-    Route::get('/user_profile_information',[\App\Http\Controllers\panelController::class,'user_profile_information'])->name('user_profile_information');
-    Route::post('/user_complete_information',[\App\Http\Controllers\panelController::class,'user_complete_information'])->name('user_complete_information');
+    Route::get('/complete_user_information',[\App\Http\Controllers\site\cartController::class,'complete_user_information'])->name('complete_user_information');
+    Route::post('/user_complete_information',[\App\Http\Controllers\site\cartController::class,'user_complete_information'])->name('user_complete_information');
 });
 
 require __DIR__.'/auth.php';

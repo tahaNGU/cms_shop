@@ -92,6 +92,7 @@
                                    value="{{\Illuminate\Support\Facades\Auth::user()->email}}"/>
 
                         </div>
+                    </div>
                         <div class="form-control w-full">
                             <label class="label">
                                 <span class="label-text-alt">شماره تماس اضطراری:</span>
@@ -100,11 +101,17 @@
                                    value="{{\Illuminate\Support\Facades\Auth::user()->tell_emergency}}"/>
 
                         </div>
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text-alt">آدرس:</span>
+                        </label>
+                        <textarea class="input input-bordered w-full" name="address" style="height: 9rem">{{\Illuminate\Support\Facades\Auth::user()->address}}</textarea>
                     </div>
 
-                    <button class="btn bg-stone-800 hover:bg-stone-900 text-white mt-4" type="submit">ثبت سفرش و
-                        پرداخت
+                    <button class="btn bg-stone-800 hover:bg-stone-900 text-white mt-4" type="submit">ارسال
                     </button>
+                    <a href="{{route('order')}}" class="btn bg-stone-800 hover:bg-stone-900 text-white mt-4" >برگشت به صفحه قبل
+                    </a>
                 </form>
             </div>
 

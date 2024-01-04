@@ -39,8 +39,8 @@ class cartController extends Controller
         return view('site.order',['cart_product'=>\Cart::getContent(),'total_price'=>$cat_total_price]);
     }
 
-    public function order2(){
-        return view('site.order2');
+    public function complete_user_information(){
+        return view('site.complete_user_information');
     }
     public function user_info_update(Request $request){
         $request->validate([
@@ -51,6 +51,7 @@ class cartController extends Controller
             'city'=>'required',
             'tell'=>'required',
             'tell_emergency'=>'required',
+            'address'=>'required',
             'email'=>'required|email',
             'post_code'=>'required|max:10',
        ]);
@@ -62,6 +63,7 @@ class cartController extends Controller
             'tell'=>$request->tell,
             'tell_emergency'=>$request->tell_emergency,
             'email'=>$request->email,
+            'address'=>$request->address,
         ]);
         return back()->with('success','اطلاعات با موفقیت تغییر کرد');
     }
@@ -74,26 +76,32 @@ class cartController extends Controller
 
 
 
-
     public function finishBasket(){
-        $arr_product=[];
-        $price=0;
-        $cat_total_price=0;
-        foreach (\Cart::getContent() as $item) {
-            $product_cart=$item['associatedModel'];
-            $arr_product['product_id'][]=$item['id'];
-            $product_variation=$product_cart->product_variation()->first();
-            $price+=$product_variation['price_final'];
-            $cat_total_price+=$product_variation['price_final'];
+
+        if(empty(auth()->user()->address)){
+           return redirect()->route('complete_user_information');
         }
-        \App\Models\cart::create([
-            'product_ids'=>implode(',',$arr_product['product_id']),
-            'user_id'=>auth()->id(),
-            'price'=>$price
-        ]);
-        foreach ($arr_product['product_id'] as $item) {
-            \Cart::remove($item);
+        else{
+            $arr_product=[];
+            $price=0;
+            $cat_total_price=0;
+            foreach (\Cart::getContent() as $item) {
+                $product_cart=$item['associatedModel'];
+                $arr_product['product_id'][]=$item['id'];
+                $product_variation=$product_cart->product_variation()->first();
+                $price+=$product_variation['price_final'];
+                $cat_total_price+=$product_variation['price_final'];
+            }
+            \App\Models\cart::create([
+                'product_ids'=>implode(',',$arr_product['product_id']),
+                'user_id'=>auth()->id(),
+                'price'=>$price
+            ]);
+            foreach ($arr_product['product_id'] as $item) {
+                \Cart::remove($item);
+            }
+            return back()->with('success','خرید شما انجام شد');
         }
-        return back()->with('success','خرید شما انجام شد');
+
     }
 }
